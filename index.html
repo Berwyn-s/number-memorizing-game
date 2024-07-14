@@ -97,6 +97,7 @@
         let stopButton = document.getElementById("stopButton")
 
         let GAMEonSTART = false
+        let cardClickDisabled = false
 
         function gameOnStart(){
             GAMEonSTART = true;
@@ -126,6 +127,8 @@
             toggleButton.classList.toggle("hidden")
             startButton.classList.toggle("hidden")
             stopButton.classList.toggle("hidden")
+
+            toggleButton.textContent = "SHOW ALL NUMBER"
         }
 
         let numberIsShown = true
@@ -232,6 +235,13 @@
             // handling on click
 
             cardNumber.addEventListener("click", (e) => {
+                if (cardClickDisabled)
+                    return
+
+                // means the card is disappears due to the correct move on the game
+                if (cardNumber.classList.contains("finished")) 
+                    return;
+                
                 e.preventDefault();
                 cardNumber.classList.add("animate");
                 setTimeout(() => {
@@ -252,6 +262,8 @@
 
                     console.log("Now selected number: " + randomNumber + " compares from last: " + lastSelectedCardNumber)
                     if (lastSelectedCardNumber == randomNumber) { // Correct !
+                        cardClickDisabled = true
+
                         lastSelectedCardEl.classList.remove("blue")
                         lastSelectedCardEl.classList.add("orange")
                         
@@ -266,14 +278,15 @@
 
                         // Remove the elements after the transition
                         setTimeout(() => {
-                            lastSelectedCardEl.add("hidden");
-                            cardNumber.add("hidden");
-                            
+                            lastSelectedCardNumber = 0;
+                            lastSelectedCardEl = undefined;
+                            cardClickDisabled = false
                         }, 800);
 
-                        lastSelectedCardNumber = 0;
-                        lastSelectedCardEl = undefined;
+
                     } else {
+                        cardClickDisabled = true
+
                         console.log("wrong move!")
                         // Apply shake animation to last selected card element if it exists
                         
@@ -291,6 +304,7 @@
 
                             lastSelectedCardNumber = 0;
                             lastSelectedCardEl = undefined;
+                            cardClickDisabled = false
                         }, 500); 
                         
 
