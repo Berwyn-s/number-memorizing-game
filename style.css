@@ -1,0 +1,57 @@
+:root{
+    --soft-blue : #B1AFFF;
+    --soft-cream: #FFE9D0;
+    --soft-orange: #EF9C66;
+    --soft-light-green:#DEAC80;
+    --soft-light-blue : #BBE9FF;
+    --soft-light-cream : #FFFED3;
+}
+
+html,body {
+    background-color: var(--soft-cream);
+}
+
+h1{
+    font-family: "Quicksand", sans-serif;
+    font-size: 50px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--soft-light-cream);
+    margin: auto;
+    padding: 10px;
+    width: 1040px;
+    height: 1040px;
+}
+
+.card-number-container{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--soft-blue);
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 15px;
+    width: 332px;
+    height: 332px;
+}
+
+.card-number{
+    position: relative;
+    background-color: var(--soft-light-blue);
+    margin: 10px;
+    border-radius: 5px;
+    width: 80px;
+    height: 100px;
+}
+
+.card-number-container.over {
+    border: 3px dotted #666;
+}
+  

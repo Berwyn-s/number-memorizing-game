@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorizing Game</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Memorizing Game</h1>
+    <div class="card-container">
+        <div draggable="true" class="card-number-container">
+            
+        </div>
+        <div draggable="true" class="card-number-container">
+            <div class="card-number">
+
+            </div>
+            <div class="card-number">
+                    
+            </div>
+            <div class="card-number">
+                    
+            </div>
+            <div class="card-number">
+                    
+            </div>
+            <div class="card-number">
+                    
+            </div>
+        </div>
+        <div draggable="true" class="card-number-container">
+
+        </div>
+        <div draggable="true" class="card-number-container">
+            
+        </div>
+        <div draggable="true" class="card-number-container">
+
+        </div>
+        <div draggable="true" class="card-number-container">
+
+        </div>
+        <div draggable="true" class="card-number-container">
+            
+        </div>
+        <div draggable="true" class="card-number-container">
+
+        </div>
+        <div draggable="true" class="card-number-container">
+
+        </div>
+        
+    </div>
+
+    <script>
+
+        let dragSrcEl;
+        function handleDragStart(e) {
+            this.style.opacity = '0.4';
+
+            dragSrcEl = this;
+
+            // dataTransfer property holds the data sent in drag action.
+            // starts in dragStart and handled in the drop event.
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+
+            items.forEach(function (item) {
+                item.classList.remove('over');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('over');
+        }
+
+        function handleDrop(e) {
+            e.stopPropagation(); // stops browser from redirecting
+
+            if (dragSrcEl !== this) {
+                dragSrcEl.innerHTML = this.innerHTML;
+                dragSrcEl.classList = this.classList
+                this.innerHTML = e.dataTransfer.getData('text/html');
+            }
+
+            return false;
+        }
+
+        let items = document.querySelectorAll('.card-number-container');
+        items.forEach(function(item) {
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragover', handleDragOver);
+            item.addEventListener('dragenter', handleDragEnter);
+            item.addEventListener('dragleave', handleDragLeave);
+            item.addEventListener('dragend', handleDragEnd);
+            item.addEventListener('drop', handleDrop);
+        });
+    
+    </script>
+</body>
+</html>
