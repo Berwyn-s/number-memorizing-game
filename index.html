@@ -235,6 +235,10 @@
                 // means the card is disappears due to the correct move on the game
                 if (cardNumber.classList.contains("finished")) 
                     return;
+
+                if (GAMEonSTART && lastSelectedCardEl == cardNumber){
+                    return
+                }
                 
                 e.preventDefault();
                 cardNumber.classList.add("animate");
