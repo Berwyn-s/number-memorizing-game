@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <h1>Memorizing Game</h1>
@@ -17,60 +20,60 @@
         <div draggable="true" class="card-number-container">
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
-            <div class="card-number"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
+            <div class="card-number blue"></div>
         </div>
     </div>
 
@@ -81,15 +84,48 @@
         <button onclick="gameOnStart()" class="startButton" id="startButton">
             START THE GAME
         </button>
+        <button onclick="gameOnStop()" class="stopButton hidden" id="stopButton">
+            STOP
+        </button>
     </div>
     
 
     <script>
 
+        let toggleButton = document.getElementById("toggleButton")
+        let startButton = document.getElementById("startButton")
+        let stopButton = document.getElementById("stopButton")
+
         let GAMEonSTART = false
 
         function gameOnStart(){
+            GAMEonSTART = true;
+            Swal.fire({
+                title: 'Game Start!',
+                text: 'The game has started!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                background: '#DEAC80'
+            });
 
+            let numbers = document.querySelectorAll(".number");
+
+            toggleButton.classList.toggle("hidden")
+            startButton.classList.toggle("hidden")
+            stopButton.classList.toggle("hidden")
+
+            // Hide all numbers
+            numbers.forEach(number => {
+                if (!number.classList.contains("hidden")) {
+                    number.classList.add("hidden");
+                }
+            });
+        }
+
+        function gameOnStop(){
+            toggleButton.classList.toggle("hidden")
+            startButton.classList.toggle("hidden")
+            stopButton.classList.toggle("hidden")
         }
 
         let numberIsShown = true
@@ -148,13 +184,20 @@
             item.addEventListener('drop', handleDrop);
         });
     
+        let lastSelectedCardNumber = 0;
+        let lastSelectedCardEl = undefined;
+        
         let usedNumbersCount = {};
         let usedNumberonTheSameBox = {};
         let numberBoxCount = 0;
         let cardNumbers = document.querySelectorAll(".card-number");
         let maxLoop = 0;
 
+
         cardNumbers.forEach(cardNumber => {
+
+            // Generate random number logic
+
             let randomNumber = Math.floor(Math.random() * 20) + 1;
             
             while (usedNumbersCount[randomNumber] >= 2 || usedNumberonTheSameBox[randomNumber]) {
@@ -185,19 +228,90 @@
             }
             
             cardNumber.innerHTML = "<p class='number'>" + randomNumber + "</p>";
+
+            // handling on click
+
             cardNumber.addEventListener("click", (e) => {
                 e.preventDefault();
                 cardNumber.classList.add("animate");
                 setTimeout(() => {
                     cardNumber.classList.remove("animate");
                 }, 600);
+
                 let numberElement = cardNumber.querySelector(".number");
                 numberElement.classList.toggle("hidden");
+
+                // Game on start
+                if (GAMEonSTART){
+                    if (lastSelectedCardNumber == 0 && lastSelectedCardEl == undefined){
+                        console.log("Now selected number: " + randomNumber)
+                        lastSelectedCardNumber = randomNumber
+                        lastSelectedCardEl = cardNumber
+                        return
+                    }
+
+                    console.log("Now selected number: " + randomNumber + " compares from last: " + lastSelectedCardNumber)
+                    if (lastSelectedCardNumber == randomNumber) { // Correct !
+                        lastSelectedCardEl.classList.remove("blue")
+                        lastSelectedCardEl.classList.add("orange")
+                        
+                        cardNumber.classList.remove("blue")
+                        cardNumber.classList.add("orange")
+
+                        // Make both elements slowly invisible over 2 seconds
+                        setTimeout(() => {
+                            lastSelectedCardEl.classList.add("finished");
+                            cardNumber.classList.add("finished");
+                        }, 0);
+
+                        // Remove the elements after the transition
+                        setTimeout(() => {
+                            lastSelectedCardEl.add("hidden");
+                            cardNumber.add("hidden");
+                            
+                        }, 800);
+
+                        lastSelectedCardNumber = 0;
+                        lastSelectedCardEl = undefined;
+                    } else {
+                        console.log("wrong move!")
+                        // Apply shake animation to last selected card element if it exists
+                        
+                        console.log(lastSelectedCardEl)
+                        lastSelectedCardEl.classList.add('shake');
+                        lastSelectedCardEl.classList.add('red');
+                        lastSelectedCardEl.classList.remove("blue");
+                        setTimeout(() => {
+                            lastSelectedCardEl.classList.remove('shake');
+                            lastSelectedCardEl.classList.remove('red');
+                            lastSelectedCardEl.classList.add('blue');
+
+                            let childNumber = lastSelectedCardEl.querySelector(".number");
+                            childNumber.classList.toggle("hidden");
+
+                            lastSelectedCardNumber = 0;
+                            lastSelectedCardEl = undefined;
+                        }, 500); 
+                        
+
+                        cardNumber.classList.add('shake')
+                        cardNumber.classList.remove("blue")
+                        cardNumber.classList.add("red")
+                        setTimeout(() => {
+                            cardNumber.classList.remove('shake');
+                            cardNumber.classList.remove('red');
+                            cardNumber.classList.add('blue');
+
+                            let childNumber = cardNumber.querySelector(".number");
+                            childNumber.classList.toggle("hidden");
+                        }, 500); 
+                        
+                    }
+                }
             });
             
         });
 
-        let toggleButton = document.getElementById("toggleButton")
         function toggleAllNumber() {
             let numbers = document.querySelectorAll(".number");
 

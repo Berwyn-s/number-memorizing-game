@@ -2,6 +2,8 @@
     --soft-blue : #B1AFFF;
     --soft-cream: #FFE9D0;
     --soft-orange: #EF9C66;
+    --soft-red: #B06161;
+    --soft-light-red: #DC8686;
     --soft-light-green:#DEAC80;
     --soft-light-blue : #BBE9FF;
     --soft-light-cream : #FFFED3;
@@ -50,11 +52,27 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--soft-light-blue);
     margin: 10px;
     border-radius: 5px;
     width: 80px;
     height: 100px;
+}
+
+.card-number.blue{
+    background-color: var(--soft-light-blue);
+}
+
+.card-number.orange{
+    background-color: var(--soft-orange);
+}
+
+.card-number.red{
+    background-color: var(--soft-red);
+}
+
+.card-numer.finished{
+    opacity: 0;
+    transition: opacity 800ms ease;
 }
 
 .card-number-container.over {
@@ -122,6 +140,7 @@ h1{
   }
 }
 
+
 .card-number.animate::after {
   bottom: -70%;
   background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
@@ -151,10 +170,29 @@ h1{
   }
 }
 
+/* Wrong animation on card number */
+.shake {
+    animation: shake 0.5s; /* Adjust duration as needed */
+    animation-iteration-count: 1; /* Shake once */
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
 /* Template Button */
 
 .button-19 {
-    display: inline-block;
+    
     background-color: #1899D6;
     border: solid transparent;
     border-radius: 16px;
@@ -171,8 +209,25 @@ h1{
 }
 
 .startButton {
-    display: inline-block;
+    
     background-color: var(--soft-orange);
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: auto;
+    font-family: din-round,sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 16px;
+    text-align: center;
+    width: 200px;
+}
+
+.stopButton {
+    
+    background-color: var(--soft-red);
     border: solid transparent;
     border-radius: 16px;
     border-width: 0 0 4px;
