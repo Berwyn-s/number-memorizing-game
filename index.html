@@ -206,7 +206,7 @@
             let randomNumber = Math.floor(Math.random() * 20) + 1;
             
             // to tolerate the same number appears in the same container, boxCount used.
-            while (usedNumbersCount[randomNumber] >= 2 || ( usedNumberonTheSameBox[randomNumber] && boxCount < 5 ) ) {
+            while (usedNumbersCount[randomNumber] >= 2 || ( usedNumberonTheSameBox[randomNumber] && boxCount < 7 ) ) {
                 console.log("Generating new number since " + randomNumber + " already used twice");
                 randomNumber = Math.floor(Math.random() * 20) + 1;
             }
