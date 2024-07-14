@@ -278,24 +278,24 @@ h1{
     }
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1680px) {
     .card-container{
-        width: 750px;
-        height: 750px;
+        width: 590px;
+        height: 590px;
     }
 
     .card-number-container{
-        width: 230px;
-        height: 230px;
+        width: 175px;
+        height: 175px;
     }
 
     .card-number{
-        width: 45px;
-        height: 65px;
+        width: 35px;
+        height: 55px;
     }
 
     .number{
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .button-container{
