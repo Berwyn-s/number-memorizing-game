@@ -15,47 +15,64 @@
     <h1>Memorizing Game</h1>
     <div class="card-container">
         <div draggable="true" class="card-number-container">
-            
         </div>
         <div draggable="true" class="card-number-container">
             <div class="card-number">
-
             </div>
-            <div class="card-number">
-                    
-            </div>
-            <div class="card-number">
-                    
-            </div>
-            <div class="card-number">
-                    
-            </div>
-            <div class="card-number">
-                    
-            </div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
         <div draggable="true" class="card-number-container">
-
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
         <div draggable="true" class="card-number-container">
-
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
         <div draggable="true" class="card-number-container">
-
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
         <div draggable="true" class="card-number-container">
-            
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
         <div draggable="true" class="card-number-container">
-
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
         <div draggable="true" class="card-number-container">
-
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
+            <div class="card-number"></div>
         </div>
-        
     </div>
 
     <script>
@@ -115,6 +132,31 @@
             item.addEventListener('drop', handleDrop);
         });
     
+        let usedNumbers = [];
+        let cardNumbers = document.querySelectorAll(".card-number");
+        cardNumbers.forEach(cardNumber => {
+            let randomNumber = Math.floor(Math.random() * 20) + 1; 
+            if (usedNumbers[randomNumber] == undefined){
+                usedNumbers[randomNumber] = 1
+            } else {
+                while (usedNumbers[randomNumber] >= 2) {
+                    console.log("Generating new number since " + randomNumber + " already used twice")
+                    randomNumber = Math.floor(Math.random() * 21) + 1;
+                }
+                usedNumbers[randomNumber]++
+            }
+            
+            cardNumber.innerHTML = "<p class='number'>" + randomNumber + "</p>";
+            cardNumber.addEventListener("click", (e) => {
+                e.preventDefault();
+                cardNumber.classList.add("animate");
+                setTimeout(() => {
+                    cardNumber.classList.remove("animate");
+                }, 600);
+            });
+        });
+
     </script>
+
 </body>
 </html>
