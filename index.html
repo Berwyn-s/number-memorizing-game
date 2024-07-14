@@ -74,14 +74,23 @@
         </div>
     </div>
 
-    <div>
-        <button onclick="toggleAllNumber()" class="button-19" role="button" id="toggleButton">
-            Hide all number
+    <div class="button-container">
+        <button onclick="toggleAllNumber()" class="button-19" id="toggleButton">
+            HIDE ALL NUMBER
+        </button>
+        <button onclick="gameOnStart()" class="startButton" id="startButton">
+            START THE GAME
         </button>
     </div>
     
 
     <script>
+
+        let GAMEonSTART = false
+
+        function gameOnStart(){
+
+        }
 
         let numberIsShown = true
         let dragSrcEl;
@@ -140,13 +149,15 @@
         });
     
         let usedNumbersCount = {};
+        let usedNumberonTheSameBox = {};
+        let numberBoxCount = 0;
         let cardNumbers = document.querySelectorAll(".card-number");
         let maxLoop = 0;
 
         cardNumbers.forEach(cardNumber => {
             let randomNumber = Math.floor(Math.random() * 20) + 1;
             
-            while (usedNumbersCount[randomNumber] >= 2) {
+            while (usedNumbersCount[randomNumber] >= 2 || usedNumberonTheSameBox[randomNumber]) {
                 console.log("Generating new number since " + randomNumber + " already used twice");
                 randomNumber = Math.floor(Math.random() * 20) + 1;
                 maxLoop++;
@@ -155,12 +166,23 @@
                     maxLoop = 0
                     break;
                 }
+
             }
             
             if (!usedNumbersCount[randomNumber]) {
                 usedNumbersCount[randomNumber] = 0;
             }
             usedNumbersCount[randomNumber]++;
+
+            if (!usedNumberonTheSameBox[randomNumber]){
+                usedNumberonTheSameBox[randomNumber] = true
+            }
+
+            numberBoxCount++;
+            if (numberBoxCount >= 5){
+                numberBoxCount = 0;
+                usedNumberonTheSameBox = {};
+            }
             
             cardNumber.innerHTML = "<p class='number'>" + randomNumber + "</p>";
             cardNumber.addEventListener("click", (e) => {

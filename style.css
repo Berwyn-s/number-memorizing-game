@@ -9,6 +9,7 @@
 
 html,body {
     background-color: var(--soft-cream);
+    padding-bottom: 20px;
 }
 
 h1{
@@ -21,6 +22,8 @@ h1{
 .card-container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     background-color: var(--soft-light-cream);
     margin: auto;
     padding: 10px;
@@ -151,51 +154,70 @@ h1{
 /* Template Button */
 
 .button-19 {
+    display: inline-block;
     background-color: #1899D6;
     border: solid transparent;
     border-radius: 16px;
     border-width: 0 0 4px;
     color: #FFFFFF;
     cursor: pointer;
-    display: inline-block;
+    margin: auto;
     font-family: din-round,sans-serif;
     font-size: 15px;
     font-weight: 700;
     padding: 13px 16px;
     text-align: center;
     width: 200px;
-  }
-  
-  .button-19:after {
-    background-clip: padding-box;
-    background-color: #1CB0F6;
+}
+
+.startButton {
+    display: inline-block;
+    background-color: var(--soft-orange);
     border: solid transparent;
     border-radius: 16px;
     border-width: 0 0 4px;
-    bottom: -4px;
-    content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
-  }
-  
-  .button-19:main,
-  .button-19:focus {
-    user-select: auto;
-  }
-  
-  .button-19:hover:not(:disabled) {
-    filter: brightness(1.1);
-    -webkit-filter: brightness(1.1);
-  }
-  
-  .button-19:disabled {
-    cursor: auto;
-  }
-  
-  .button-19:active {
-    border-width: 4px 0 0;
-    background: none;
-  }
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: auto;
+    font-family: din-round,sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 16px;
+    text-align: center;
+    width: 200px;
+}
+
+.button-container{
+    display: flex;
+    width: 1040px;
+    margin : auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 2080px) {
+    .card-container{
+        width: 750px;
+        height: 750px;
+    }
+
+    .card-number-container{
+        width: 230px;
+        height: 230px;
+    }
+
+    .card-number{
+        width: 45px;
+        height: 65px;
+    }
+
+    .number{
+        font-size: 30px;
+    }
+
+    .button-container{
+        width: 750px;
+        margin-top: 15px;
+    }
+}
