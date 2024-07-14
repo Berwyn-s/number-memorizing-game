@@ -190,29 +190,22 @@
         let lastSelectedCardNumber = 0;
         let lastSelectedCardEl = undefined;
         
+        let cardNumbers = document.querySelectorAll(".card-number");
+        
         let usedNumbersCount = {};
         let usedNumberonTheSameBox = {};
         let numberBoxCount = 0;
-        let cardNumbers = document.querySelectorAll(".card-number");
-        let maxLoop = 0;
-
+        let boxCount = 0;
 
         cardNumbers.forEach(cardNumber => {
 
             // Generate random number logic
-
             let randomNumber = Math.floor(Math.random() * 20) + 1;
             
-            while (usedNumbersCount[randomNumber] >= 2 || usedNumberonTheSameBox[randomNumber]) {
+            // to tolerate the same number appears in the same container, boxCount used.
+            while (usedNumbersCount[randomNumber] >= 2 || ( usedNumberonTheSameBox[randomNumber] && boxCount < 5 ) ) {
                 console.log("Generating new number since " + randomNumber + " already used twice");
                 randomNumber = Math.floor(Math.random() * 20) + 1;
-                maxLoop++;
-                if (maxLoop >= 100) {
-                    console.log("maxLoop exceeded 100, terminating");
-                    maxLoop = 0
-                    break;
-                }
-
             }
             
             if (!usedNumbersCount[randomNumber]) {
@@ -227,6 +220,7 @@
             numberBoxCount++;
             if (numberBoxCount >= 5){
                 numberBoxCount = 0;
+                boxCount++;
                 usedNumberonTheSameBox = {};
             }
             
