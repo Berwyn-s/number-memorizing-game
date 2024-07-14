@@ -17,8 +17,7 @@
         <div draggable="true" class="card-number-container">
         </div>
         <div draggable="true" class="card-number-container">
-            <div class="card-number">
-            </div>
+            <div class="card-number"></div>
             <div class="card-number"></div>
             <div class="card-number"></div>
             <div class="card-number"></div>
@@ -75,8 +74,16 @@
         </div>
     </div>
 
+    <div>
+        <button onclick="toggleAllNumber()" class="button-19" role="button" id="toggleButton">
+            Hide all number
+        </button>
+    </div>
+    
+
     <script>
 
+        let numberIsShown = true
         let dragSrcEl;
         function handleDragStart(e) {
             this.style.opacity = '0.4';
@@ -153,8 +160,45 @@
                 setTimeout(() => {
                     cardNumber.classList.remove("animate");
                 }, 600);
+                let numberElement = cardNumber.querySelector(".number");
+                numberElement.classList.toggle("hidden");
             });
+            
         });
+
+        let toggleButton = document.getElementById("toggleButton")
+        function toggleAllNumber() {
+            let numbers = document.querySelectorAll(".number");
+
+            updateToggleButtonText()
+            if (numberIsShown){
+                numbers.forEach(number => {
+                if (!number.classList.contains("hidden")) {
+                    number.classList.add("hidden");
+                }
+                });
+                numberIsShown = false
+                return
+            }
+
+            numberIsShown = true
+            numbers.forEach(number => {
+                if (number.classList.contains("hidden")) {
+                    number.classList.remove("hidden");
+                }
+            });
+            
+        }
+
+
+        function updateToggleButtonText(){
+            if (numberIsShown){
+                toggleButton.textContent = "SHOW ALL NUMBER"
+            }else{
+                toggleButton.textContent = "HIDE ALL NUMBER"
+            }
+        }
+        
 
     </script>
 
